@@ -12,7 +12,18 @@ class CartItem extends React.Component{
         //this.increaseQuantity= this.increaseQuantity.bind(this);
     }
     increaseQuantity=()=>{
-        console.log('this.state.price',this.state.price);
+        //this.state.qty+=1;
+        console.log('this.state.price',this.state.qty);
+        //setSte form 1 uses shallow merging only changes qty
+        //this.setState({
+            //qty:this.state.qty+1,
+        //});
+        //setstate form 2
+        this.setState((prevState)=>{
+            return {
+                qty: prevState.qty+1
+            }
+        });
     }
 
     render(){
