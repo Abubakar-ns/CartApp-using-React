@@ -1,16 +1,26 @@
 import React from 'react';
 
 class CartItem extends React.Component{
+    constructor(){
+        super();
+        this.state={
+            price: 999,
+            title: 'Phone',
+            qty: 1,
+            img:''
+        }
+    }
     render(){
+    const { price,title,qty}= this.state; {/*object destructuring (I want these properties from above constructor)*/}
         return(
             <div className="cart-item">
                 <div className="left-block">
                     <img style={styles.image}/>
                 </div>
                 <div className="right-block">
-                    <div style={{fontSize:25}}>Phone</div>
-                    <div style={{color:'#777'}} >Rs 9999</div>
-                    <div style={{color:'#777'}} >Qty:1</div>
+                    <div style={{fontSize:25}}>{title}</div>
+                    <div style={{color:'#777'}} >{price}</div>
+                    <div style={{color:'#777'}} >{qty}</div>
                     <div className="cart-item-actions">
                         {/*Buttons*/}
                         <img alt="Add" className="action-icons" src="https://www.flaticon.com/svg/vstatic/svg/992/992651.svg?token=exp=1615535381~hmac=b27509289ba3bfdd15c31e1c42be0f39" />
