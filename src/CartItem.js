@@ -41,7 +41,8 @@ class CartItem extends React.Component{
     }
 
     render(){
-    const { price,title,qty}= this.state; {/*object destructuring (I want these properties from above constructor)*/}
+        console.log()
+    const { price,title,qty}= this.props.product; {/*object destructuring (I want these properties from above constructor)*/}
         return(
             <div className="cart-item">
                 <div className="left-block">
