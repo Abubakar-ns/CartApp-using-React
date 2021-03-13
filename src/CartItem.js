@@ -25,6 +25,20 @@ class CartItem extends React.Component{
             }
         });
     }
+    decreaseQuantity=()=>{
+     
+        const {qty} = this.state;
+        if(qty===0){
+            return;
+        }
+
+
+        this.setState((prevState)=>{
+            return {
+                qty: prevState.qty-1
+            }
+        });
+    }
 
     render(){
     const { price,title,qty}= this.state; {/*object destructuring (I want these properties from above constructor)*/}
@@ -42,19 +56,19 @@ class CartItem extends React.Component{
                         <img 
                             alt="Add" 
                             className="action-icons" 
-                            src="https://www.flaticon.com/svg/vstatic/svg/992/992651.svg?token=exp=1615535381~hmac=b27509289ba3bfdd15c31e1c42be0f39"
+                            src="./images/992651.svg"
                             onClick={this.increaseQuantity}
                          />
                         <img 
                             alt="Remove" 
                             className="action-icons" 
-                            src="https://www.flaticon.com/svg/vstatic/svg/992/992683.svg?token=exp=1615535339~hmac=6ed6edfdcec9b977b93b9494c0477d13" 
-                            
+                            src="./images/992683.svg"
+                            onClick={this.decreaseQuantity}
                         />
                         <img 
                             alt="Delete" 
                             className="action-icons" 
-                            src="https://www.flaticon.com/svg/vstatic/svg/3096/3096673.svg?token=exp=1615535400~hmac=93e37fcad67c2429b76526bd95087641" 
+                            src="./images/3096673.svg"
                         />
 
                     </div>
