@@ -51,12 +51,15 @@ class Cart extends React.Component{
         //console.log('Hey Please inc the qty of',product);
         const {products} = this.state;
         const index = products.indexOf(product);
-        if(products[index].qty!=0){
+        if(products[index].qty===0){
+            return;
+        }
+        else{
             products[index].qty-=1;
-        this.setState({
-            //products:products
-            products
-        })
+            this.setState({
+                //products:products
+                products
+            })
         }
 
 
@@ -74,7 +77,7 @@ class Cart extends React.Component{
         const { products } = this.state;
       
         return(
-            <div className="cart">
+            <div className="cart" style={styles.cart}>
                 {products.map((product)=>{
                     return(
                         <CartItem 
@@ -90,5 +93,11 @@ class Cart extends React.Component{
             
         );
     }
+}
+const styles = {
+    cart:{
+        //backgroundColor: 'grey'
+    },
+    
 }
 export default Cart;

@@ -1,13 +1,12 @@
 import React from 'react';
 
-class CartItem extends React.Component{
-   
-    render(){
+const CartItem = (props)=> {
+
         //console.log('this.props',this.props);
-        const { price,title,qty}= this.props.product; {/*object destructuring (I want these properties from above constructor)*/}
-        const {product,onIncreaseQuantity,onDecreaseQuantity,onDeleteProduct} = this.props; {/* on incr or decr we need props to dec or inc quantity so wo destructured here */}
+        const { price,title,qty}= props.product; {/*object destructuring (I want these properties from above constructor)*/}
+        const {product,onIncreaseQuantity,onDecreaseQuantity,onDeleteProduct} = props; {/* on incr or decr we need props to dec or inc quantity so wo destructured here */}
         return(
-            <div className="cart-item">
+            <div className="cart-item" style={styles.cartItem}>
                 <div className="left-block">
                     <img style={styles.image}/>
                 </div>
@@ -40,7 +39,7 @@ class CartItem extends React.Component{
                 </div>
             </div>
         )
-    }
+    
 }
 const styles = {
     image: {
@@ -48,8 +47,10 @@ const styles = {
         width: 110,
         borderRadius: 4,
         background: '#777'
-
-
+    },
+    cartItem:{
+        marginTop: '4%',
     }
+    
 }
 export default CartItem;
