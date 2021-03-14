@@ -8,7 +8,9 @@ const Navbar = (props)=>{
                <div style={styles.cartIconContainer}>
                    <img style={styles.cartIcon} src="./images/7.webp"/>
                    <span style={styles.cartSize} >{props.count}</span>
+                   
                </div>
+               
            </div>
        );
 }
