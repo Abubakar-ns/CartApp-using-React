@@ -2,9 +2,14 @@ import React from 'react';
 
 const CartItem = (props)=> {
 
-        //console.log('this.props',this.props);
+        console.log('this.props',props);
         const { price,title,qty}= props.product; {/*object destructuring (I want these properties from above constructor)*/}
-        const {product,onIncreaseQuantity,onDecreaseQuantity,onDeleteProduct} = props; {/* on incr or decr we need props to dec or inc quantity so wo destructured here */}
+        const {
+            product,
+            onIncreaseQuantity,
+            onDecreaseQuantity,
+            onDeleteProduct
+        } = props; {/* on incr or decr we need props to dec or inc quantity so wo destructured here */}
         return(
             <div className="cart-item" style={styles.cartItem}>
                 <div className="left-block">
@@ -20,7 +25,7 @@ const CartItem = (props)=> {
                             alt="Add" 
                             className="action-icons" 
                             src="./images/992651.svg"
-                            onClick={()=> onIncreaseQuantity(product)}
+                            onClick={() => onIncreaseQuantity(product)}
                          />
                         <img 
                             alt="Remove" 

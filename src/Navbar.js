@@ -1,4 +1,4 @@
-import { findByLabelText } from '@testing-library/dom';
+
 import React from 'react';
 
 const Navbar = (props)=>{
@@ -7,7 +7,7 @@ const Navbar = (props)=>{
            <div style={styles.nav}>
                <div style={styles.cartIconContainer}>
                    <img style={styles.cartIcon} src="./images/7.webp"/>
-                   <span style={styles.cartSize} >4</span>
+                   <span style={styles.cartSize} >{}4</span>
                </div>
            </div>
        );
