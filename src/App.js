@@ -105,11 +105,15 @@ class App extends React.Component {
   }
   handleDeleteProduct = (id)=>{
       const {products} = this.state;
-      const items = products.filter((item)=>item.id!==id);
-      this.setState({
-          //products:products
-          products:items
-      })
+      const docRef = this.db.collection('Products').doc(id);
+        docRef
+          .delete()
+          .then(()=>{
+              console.log('Deleted Succesfully');
+          })
+          .catch((error)=>{
+            console.log('Error: ',error);
+          })
   }
   getCartCount=()=>{
     const {products} = this.state;
@@ -131,10 +135,10 @@ class App extends React.Component {
     this.db
         .collection('Products')
         .add({
-          img: 'https://images-na.ssl-images-amazon.com/images/I/81flpwn4x6L._SL1500_.jpg',
-          price: 900,
-          qty: 34,
-          title: 'washing machine'
+          img: 'https://images-na.ssl-images-amazon.com/images/I/914hFeTU2-L._SL1500_.jpg',
+          price: 45999,
+          qty: 3,
+          title: 'DSLR'
         })
         .then((docRef)=>{
             console.log('Product has been added',docRef);
@@ -153,7 +157,7 @@ class App extends React.Component {
             }
             />
             }
-            {/* <button onClick={this.addProduct} style={styles.addpro} >Add a Product</button> */}
+            <button onClick={this.addProduct} style={styles.addpro} >Add a Product</button>
           <Cart
             products = {products}
             onIncreaseQuantity = {this.handleIncreaseQuantity}
