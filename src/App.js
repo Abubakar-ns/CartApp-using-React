@@ -1,41 +1,37 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Cart from './Cart';
+import firebase from 'firebase';
 class App extends React.Component {
   constructor(){
     super();
     this.state={
-        products: [
-            {
-                price: 99,
-                title: 'Watch',
-                qty: 1,
-                img:'https://images-na.ssl-images-amazon.com/images/I/71ERfTd2-KL._UX466_.jpg',
-                id: 1
-            },
-            {
-                price:999,
-                title:'Shirt',
-                qty:1,
-                img:'https://cdn.shopify.com/s/files/1/0456/2740/8593/products/Men_sVintageFloralEthnicTShirtsSummerBeachDashikiFloralCasualTopsTee-01_7fcdb8b7-c2d4-4121-bd62-ef07ed45363d_254x@2x.png?v=1613123112',
-                id: 2
-            },
-            {
-                price: 9999,
-                title: 'Phone',
-                qty: 1,
-                img:'https://images-na.ssl-images-amazon.com/images/I/71w3oJ7aWyL._SL1500_.jpg',
-                id: 3
-            },
-            {
-                price: 99999,
-                title: 'Laptop',
-                qty: 1,
-                img:'https://i.dell.com/is/image/DellContent//content/dam/global-asset-library/Products/Notebooks/Inspiron/15_5508_non-touch/in5508nt_cnb_00055lf110_gr.psd?fmt=pjpg&pscan=auto&scl=1&hei=402&wid=668&qlt=85,0&resMode=sharp2&op_usm=1.75,0.3,2,0&size=668,402',
-                id: 4
-            }
-        ]
+        products: []
     }
+  }
+  componentDidMount(){
+    firebase
+      .firestore()
+      .collection('Products')
+      .get()
+      .then((snapshot)=>{
+        //console.log(snapshot);
+
+        //snapshot.docs.map((doc)=>{
+        //  console.log(doc.data())
+        //});
+
+        const products = snapshot.docs.map((doc)=>{
+          const data = doc.data();
+          data['id']=doc.id
+          return data;
+        });
+        this.setState({
+          //products array wala products hai 
+          //right wala product upar snapshot.doc.map se aaya
+          products: products
+        })
+      })
   }
   handleIncreaseQuantity = (product)=>{
       //console.log('Hey Please inc the qty of',product);
