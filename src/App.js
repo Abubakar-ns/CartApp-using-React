@@ -10,13 +10,35 @@ class App extends React.Component {
         products: [],
         loading: true
     }
+    this.db = firebase.firestore();
   }
   componentDidMount(){
-    firebase
-      .firestore()
+    // firebase
+    //   .firestore()
+    //   .collection('Products')
+    //   .get()
+    //   .then((snapshot)=>{
+    //     //console.log(snapshot);
+
+    //     //snapshot.docs.map((doc)=>{
+    //     //  console.log(doc.data())
+    //     //});
+
+    //     const products = snapshot.docs.map((doc)=>{
+    //       const data = doc.data();
+    //       data['id']=doc.id
+    //       return data;
+    //     });
+    //     this.setState({
+    //       //products array wala products hai 
+    //       //right wala product upar snapshot.doc.map se aaya
+    //       products: products,
+    //       loading: false
+    //     })
+    //   })
+    this.db
       .collection('Products')
-      .get()
-      .then((snapshot)=>{
+      .onSnapshot((snapshot)=>{
         //console.log(snapshot);
 
         //snapshot.docs.map((doc)=>{
@@ -89,24 +111,42 @@ class App extends React.Component {
     })
     return count;
   }
+  addProduct=()=>{
+    this.db
+        .collection('Products')
+        .add({
+          img: 'https://images-na.ssl-images-amazon.com/images/I/81flpwn4x6L._SL1500_.jpg',
+          price: 900,
+          qty: 34,
+          title: 'washing machine'
+        })
+        .then((docRef)=>{
+            console.log('Product has been added',docRef);
+
+        })
+        .catch((error)=> {
+              console.log('Error',error);
+        })
+  }
   render(){
     const {products,loading} = this.state;
     return (
       <div className="App">
-          <Navbar count={
+          {!loading && <Navbar count={
             this.getCartCount()
             }
             />
+            }
+            <button onClick={this.addProduct} style={styles.addpro} >Add a Product</button>
           <Cart
             products = {products}
             onIncreaseQuantity = {this.handleIncreaseQuantity}
             onDecreaseQuantity = {this.handleDecreaseQuantity} 
             onDeleteProduct = {this.handleDeleteProduct}
           />
-          {(loading)&& <h1>Loading Products...</h1>}
-          <div style={styles.totalblock}>
-            <span style={styles.total}>Total: {this.getTotalPrice()}</span>
-          </div>
+          {(loading)&& <h1 style={styles.load}>Loading Products...</h1>}
+          <div style={styles.totalblock}>{!loading && <span style={styles.total}>Total: {this.getTotalPrice()}</span>} </div>
+          
       </div>
     );
   }
@@ -126,6 +166,21 @@ const styles={
 
     color: 'white',
     padding: '4px 8px',
+    textAlign: 'center',
+    
+    
+  },
+  load:{
+    marginTop: '15%',
+    marginLeft: '35%',
+
+  },
+  addpro:{
+    backgroundColor: 'black',
+    color: 'white',
+    textAlign: 'center',
+    padding: 20,
+    fontSize: 20,
     
   }
 }
