@@ -2,7 +2,7 @@ import React from 'react';
 
 const CartItem = (props)=> {
 
-        console.log('this.props',props);
+        //console.log('this.props',props);
         const { price,title,qty}= props.product; {/*object destructuring (I want these properties from above constructor)*/}
         const {
             product,
