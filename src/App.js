@@ -2,11 +2,13 @@ import React from 'react';
 import Navbar from './Navbar';
 import Cart from './Cart';
 import firebase from 'firebase';
+
 class App extends React.Component {
   constructor(){
     super();
     this.state={
-        products: []
+        products: [],
+        loading: true
     }
   }
   componentDidMount(){
@@ -29,7 +31,8 @@ class App extends React.Component {
         this.setState({
           //products array wala products hai 
           //right wala product upar snapshot.doc.map se aaya
-          products: products
+          products: products,
+          loading: false
         })
       })
   }
@@ -55,7 +58,8 @@ class App extends React.Component {
           products[index].qty-=1;
           this.setState({
               //products:products
-              products
+              products,
+              
           })
       }
 
@@ -86,7 +90,7 @@ class App extends React.Component {
     return count;
   }
   render(){
-    const {products} = this.state;
+    const {products,loading} = this.state;
     return (
       <div className="App">
           <Navbar count={
@@ -99,6 +103,7 @@ class App extends React.Component {
             onDecreaseQuantity = {this.handleDecreaseQuantity} 
             onDeleteProduct = {this.handleDeleteProduct}
           />
+          {(loading)&& <h1>Loading Products...</h1>}
           <div style={styles.totalblock}>
             <span style={styles.total}>Total: {this.getTotalPrice()}</span>
           </div>
