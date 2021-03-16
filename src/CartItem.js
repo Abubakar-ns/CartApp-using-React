@@ -49,7 +49,7 @@ const CartItem = (props)=> {
 const styles = {
     image: {
         height: 110,
-        width: 120,
+        width: 145,
         borderRadius: 4,
         background: '#777'
     },

@@ -38,6 +38,9 @@ class App extends React.Component {
     //   })
     this.db
       .collection('Products')
+      .where('price','>=',99999 )
+      .where('title','==','Laptop')
+      .orderBy('price','desc')
       .onSnapshot((snapshot)=>{
         //console.log(snapshot);
 
@@ -104,7 +107,6 @@ class App extends React.Component {
 
   }
   handleDeleteProduct = (id)=>{
-      const {products} = this.state;
       const docRef = this.db.collection('Products').doc(id);
         docRef
           .delete()
